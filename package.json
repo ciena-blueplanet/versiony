@@ -1,6 +1,6 @@
 {
     "name": "versiony",
-    "version": "3.4.0",
+    "version": "1.4.0",
     "description": "A module to increment version number for your code/module. Support for npm/bower/custom files.",
     "main": "index.js",
     "scripts": {
