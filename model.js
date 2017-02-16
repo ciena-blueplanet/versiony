@@ -60,14 +60,14 @@ module.exports = function(){
             if (increments[name]){
                 array[index]++
             }
-            if (parts[name] != null){
-                array[index] = parts[name]
-            }
             if (maxValues[name] != null){
                 while (array[index] > maxValues[name]){
-                    array[index] -= (maxValues[name]+1)
-                    array[index-1]++
+                  array[index] -= (maxValues[name]+1)
+                  array[index-1]++
                 }
+            }
+            if (parts[name] != null){
+                array[index] = parts[name]
             }
         },
 
