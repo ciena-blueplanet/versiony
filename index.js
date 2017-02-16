@@ -88,6 +88,18 @@ var versiony = (function(){
             return this
         },
 
+        maxPatch: function(maxValue){
+            this.model.maxPatch.apply(this.model, arguments)
+
+            return this
+        },
+
+        maxMinor: function(maxValue){
+            this.model.maxMinor.apply(this.model, arguments)
+
+            return this
+        },
+
         from: function(s){
             source = s || 'package.json'
 

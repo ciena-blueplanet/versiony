@@ -152,6 +152,21 @@ Causes the current minor version to be incremented by 1
 
 Sets the current minor version to have the specified value
 
+## maxMinor(value)
+
+Sets the current max minor value.
+If minor value exceeds this value, the current value is decreased of max value until it is under the max value. While the minor value is over the max value, major value is incresed of 1 unity 
+
+Example: final result is 6.0.10
+
+```js
+    versiony
+        .version('5.99.10')
+        .minor()
+        .maxMinor(99)
+        .end().version
+```
+
 ## patch()
 
 Causes the current patch version to be incremented by 1
@@ -161,6 +176,32 @@ Causes the current patch version to be incremented by 1
 Sets the current patch version to have the specified value
 
 Calling major() twice does not cause the increment to be applied twice. It is only applied once. Same for minor() and patch()
+
+## maxPatch(value)
+
+Sets the current max patch value.
+If patch value exceeds this value, the current value is decreased of max value until it is under the max value. While the patch value is over the max value, minor value is incresed of 1 unity 
+
+Example: final result is 4.1.0
+
+```js
+    versiony
+        .version('4.0.99')
+        .patch()
+        .maxPatch(99)
+        .end().version
+```
+
+Example: final result is 5.0.0
+
+```js
+    versiony
+        .version('4.99.99')
+        .patch()
+        .maxPatch(99)
+        .maxMinor(99)
+        .end().version
+```
 
 ## newMajor
 
