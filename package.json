@@ -1,29 +1,29 @@
 {
-  "name": "versiony",
-  "version": "1.4.0",
-  "description": "A module to increment version number for your code/module. Support for npm/bower/custom files.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo no tests yet"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/ciena-blueplanet/versiony.git"
-  },
-  "keywords": [
-    "version",
-    "manager",
-    "version manager",
-    "bump",
-    "package.json",
-    "bower version",
-    "bower",
-    "version"
-  ],
-  "author": "Radu Brehar",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ciena-blueplanet/versiony/issues"
-  },
-  "dependencies": {}
+    "name": "versiony",
+    "version": "9.4.0",
+    "description": "A module to increment version number for your code/module. Support for npm/bower/custom files.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo no tests yet"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/ciena-blueplanet/versiony.git"
+    },
+    "keywords": [
+        "version",
+        "manager",
+        "version manager",
+        "bump",
+        "package.json",
+        "bower version",
+        "bower",
+        "version"
+    ],
+    "author": "Radu Brehar",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/ciena-blueplanet/versiony/issues"
+    },
+    "dependencies": {}
 }

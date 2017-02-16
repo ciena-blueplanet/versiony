@@ -34,6 +34,12 @@ module.exports = function(){
             reset: reset
         },
 
+        maxValues = {
+            major: null,
+            minor: null,
+            patch: null
+        },
+
         shouldSet = function(name, v){
             if (v != null){
                 parts[name]      = v
@@ -44,6 +50,10 @@ module.exports = function(){
             }
         },
 
+        setMaxValue = function(name, v){
+            maxValues[name] = v
+        },
+
         prepareValue = function(name, array){
             var index = indexes[name]
 
@@ -52,6 +62,12 @@ module.exports = function(){
             }
             if (parts[name] != null){
                 array[index] = parts[name]
+            }
+            if (maxValues[name] != null){
+                while (array[index] > maxValues[name]){
+                    array[index] -= (maxValues[name]+1)
+                    array[index-1]++
+                }
             }
         },
 
@@ -81,6 +97,14 @@ module.exports = function(){
 
         patch : function(v){
             shouldSet('patch', v)
+        },
+
+        maxPatch : function(v){
+            setMaxValue('patch', v)
+        },
+
+        maxMinor : function(v){
+            setMaxValue('minor', v)
         },
 
         toString : function(){
@@ -123,9 +147,9 @@ module.exports = function(){
             !value[1] && (value[1] = 0)
             !value[2] && (value[2] = 0)
 
-            prepareValue('major', value)
-            prepareValue('minor', value)
             prepareValue('patch', value)
+            prepareValue('minor', value)
+            prepareValue('major', value)
 
             var result = value.map(function(v){
                 return parseInt(v, 10)

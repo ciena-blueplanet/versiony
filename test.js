@@ -8,3 +8,12 @@ versiony
 var r = versiony.get()
 
 console.log(r)
+
+var r = versiony
+  .version('2.99.99')
+  .patch()
+  .maxPatch(99)
+  .maxMinor(99)
+  .end().version
+
+console.log(r)
