@@ -1,3 +1,9 @@
+# 1.4.1 (2017-06-09)
+* **Added** `pullapprove` integration
+* **Added** latest `pr-bumper` integration (to support `none` version bump)
+* **Cleaned** up the `README.md` a little
+* **Renamed** `changelog.md` to `CHANGELOG.md` to work with `pr-bumper`
+
 # 1.2.4
 
  - remove package.json preferGlobal
