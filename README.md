@@ -1,4 +1,13 @@
-# versiony
+[ci-img]: https://img.shields.io/travis/ciena-blueplanet/versiony.svg "Travis CI Build Status"
+[ci-url]: https://travis-ci.org/ciena-blueplanet/versiony
+
+[cov-img]: https://img.shields.io/coveralls/ciena-blueplanet/versiony.svg "Coveralls Code Coverage"
+[cov-url]: https://coveralls.io/github/ciena-blueplanet/versiony
+
+[npm-img]: https://img.shields.io/npm/v/versiony.svg "NPM Version"
+[npm-url]: https://www.npmjs.com/package/versiony
+
+# versiony <br> [![Travis][ci-img]][ci-url] [![Coveralls][cov-img]][cov-url] [![NPM][npm-img]][npm-url]
 
 Node.js module to increment version number for your code/module
 
