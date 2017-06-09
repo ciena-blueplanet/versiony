@@ -1,10 +1,12 @@
 {
   "name": "versiony",
-  "version": "1.4.1",
+  "version": "2.0.0",
   "description": "A module to increment version number for your code/module. Support for npm/bower/custom files.",
   "main": "index.js",
   "scripts": {
-    "test": "echo no tests yet"
+    "lint": "eslint tests/**/*.js",
+    "test": "npm run lint && npm run utest",
+    "utest": "istanbul cover _mocha -R tests --report lcov --report json-summary"
   },
   "repository": {
     "type": "git",
@@ -29,5 +31,24 @@
   "bugs": {
     "url": "https://github.com/ciena-blueplanet/versiony/issues"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "chai": "^3.5.0",
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-mocha": "^4.9.0",
+    "eslint-plugin-node": "^5.0.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.4.2",
+    "promise": "^7.1.1",
+    "sinon": "^2.3.2",
+    "sinon-chai": "^2.10.0"
+  },
+  "pr-bumper": {
+    "coverage": 82.72
+  }
 }
