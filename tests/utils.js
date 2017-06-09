@@ -2,6 +2,8 @@
  * Utilities to help with testing versiony
  */
 
+'use strict'
+
 const expect = require('chai').expect
 const cpExec = require('child_process').exec
 const path = require('path')
