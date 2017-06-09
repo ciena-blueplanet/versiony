@@ -1,31 +1,44 @@
+sudo: false
 language: node_js
+
 node_js:
 - '5.3'
-sudo: false
-branches:
-  except:
-  - /^v[0-9\.]+/
-before_install:
-- npm install -g coveralls pr-bumper bower
-- pr-bumper check
-install:
-- npm install
-- bower install
-after_success:
-- cat coverage/lcov.info | coveralls
-env:
-  matrix:
-  - CXX=g++-4.8
-  global:
-    secure: guGWCsuYH610DX81CqRKkDVcYmwW1NUAzlk2HlnfaeLF1IXveFYcqooh5fmmouZ1mCnT4Az0JAX12yLFsdbitXm7eXvLC3u/EGHOjnYwFA1VzwyfdC7kRpmMXRB4nDzQEwQqu0PqFE+QrUnwwqJanjXE84mOdaOP4Lf5l7TvuOVNCvRI6sjWA3XMwp9QE93zYygyB2jVxBA9NKy5LYlXMJiZV5rctoZO0wILRIAxV0iL97XK0u/u778dvNHLHLWikhU2juTSjqB3dxDTUSZg5blyXPPrOrCfKutypgBpNemi7k+p3ZsbwpYwXd6pKJpZUJtqz2kUfqo1QFihLuZ6YhYpUwf3ysfo6KWxsgNBUl6umD/dnBECNbvo8nw1OPICmG1Xj+8FP1MkVgmb53j7jwVR67QGcQWgtIn5pZCM46FQefDB2yPC5OvApahF8LLQuVt2xiKeA4hoF/UcPXalXwFsiftWRcOlxeLox/Tm5f6rrbtCm9Xiw+XPnRCZMHgbECkjvuRGbJNcZvMNU3dapc3HMDvvo0r3V2DermOizbd9Hk9yuJeVsj0dNJXHYaHz3wyjQ9yTuCnPcBqrTrAqpVpAW+Ca8kpJQMVScRLqLy9BKpLV5YcmxaDCxmv4VPSiz/2riZZsaM9veghkfAhZQI6WpSM6CXwQtQ6YFFHySn8=
+- '6.11.0'
+- 'stable'
+
 addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test
     packages:
     - g++-4.8
-before_deploy:
-- pr-bumper bump
+cache:
+  directories:
+  - node_modules
+
+env:
+  matrix:
+  - CXX=g++-4.8
+  global:
+    secure: guGWCsuYH610DX81CqRKkDVcYmwW1NUAzlk2HlnfaeLF1IXveFYcqooh5fmmouZ1mCnT4Az0JAX12yLFsdbitXm7eXvLC3u/EGHOjnYwFA1VzwyfdC7kRpmMXRB4nDzQEwQqu0PqFE+QrUnwwqJanjXE84mOdaOP4Lf5l7TvuOVNCvRI6sjWA3XMwp9QE93zYygyB2jVxBA9NKy5LYlXMJiZV5rctoZO0wILRIAxV0iL97XK0u/u778dvNHLHLWikhU2juTSjqB3dxDTUSZg5blyXPPrOrCfKutypgBpNemi7k+p3ZsbwpYwXd6pKJpZUJtqz2kUfqo1QFihLuZ6YhYpUwf3ysfo6KWxsgNBUl6umD/dnBECNbvo8nw1OPICmG1Xj+8FP1MkVgmb53j7jwVR67QGcQWgtIn5pZCM46FQefDB2yPC5OvApahF8LLQuVt2xiKeA4hoF/UcPXalXwFsiftWRcOlxeLox/Tm5f6rrbtCm9Xiw+XPnRCZMHgbECkjvuRGbJNcZvMNU3dapc3HMDvvo0r3V2DermOizbd9Hk9yuJeVsj0dNJXHYaHz3wyjQ9yTuCnPcBqrTrAqpVpAW+Ca8kpJQMVScRLqLy9BKpLV5YcmxaDCxmv4VPSiz/2riZZsaM9veghkfAhZQI6WpSM6CXwQtQ6YFFHySn8=
+
+matrix:
+  fast_finish: true
+  allow_failures:
+  - node_js: 'stable'
+
+before_install:
+- npm config set spin false
+- npm install -g coveralls pr-bumper@^1.0.0
+- $(npm root -g)/pr-bumper/.travis/maybe-check-scope.sh
+
+install:
+- $(npm root -g)/pr-bumper/.travis/maybe-install.sh
+
+script:
+- $(npm root -g)/pr-bumper/.travis/maybe-test.sh
+- $(npm root -g)/pr-bumper/.travis/maybe-bump-version.sh
+
 deploy:
   provider: npm
   email: npm.ciena@gmail.com
@@ -33,8 +46,9 @@ deploy:
   api_key:
     secure: IRYmlByUkKb+vzYJx6MC5A1x+VuiYrtwtZeYQz1SiGCe23MBMF22px1Jf72y9TpG+Q/pFgSSSmMI6nwyvgluR3unTAoNhXDvngs1t/DWkN65HUj/ufphFSmpPeBFl/gPA2QvbFWJA+Y1P9dFIrTV3mHzeSB4WBI9vtCZLpOmbGN5z6ispKN7Wu+CeFRR/RpFiLxBIDr7GClBVTC0swDWKDBLzFm81J7Gx4Kh0B7B3PlUfgb/fae7dXjwWKBvH1hy5dq2UuY+hH3OLXx+wYfMaVbub7SKYqTRF4uQ09c9Gz/iHF/s9gZRCs9rV3XMjs9cV1AYaJRAlqnjM+MFqaempMLgyJiTbuL3EkyggE2ieHG0aFKSejw1XMmO3GGEozIb+BZZ3sl95K+GpvmcEycoANUWOp42NmUJhb5QEUO7ntQvejUi7wBCqMIIieoGWvs6/lZunwmy49Y0olAdxExYp3dmJkzjKfzt++oyX62xF/dczRGXy6vpEfoXud0WvJeSbbQh0VHvwdDZ62qrGSHeHZ8UgclTNKIHe9sfhCcNyM6OORaaM5+iecoBeAp9d60RBdyMXHkSwtHv6upNWfmtk5Vot96G2O7lTRTr0XA6jDU8As/XQZMG6XB44uwlwvLyZSTmHLvBnXrjM5D5xhR/6LWNjjx4hqfVKbSJDbHT2+8=
   on:
-    branch: master
-    tags: false
+    all_branches: true
+    node: '6.9.1'
+    tags: true
 notifications:
   slack:
     secure: DF4kJuD3Gfb+SFM4KCKoNzB6pudppn70h3iqEDS8HMGBRAMfwEUrQ0pAr/bLsVuftg90uWsV7KW1oz5bfRNhBhn8gRNKrCEoT0DYeFrwUh+7pU/+1fW4W1cEz5tZJR2agZBQrPe2uW9BB/nDxa9ggK67yNGRQ3UYcaxmG/C5IF+jrM9LoVMeBp/ZtEs47yHOeLx64mRMdHN/Hib+bNFV1+CVnlvaf9KLGUPjYfM6HCqlOCjIZQg+Qxvd/z33KX0KPi8nB3f/PH0NALJaIkyUvy4VdqaxwChuGSs90cVwxWEdvpcPXSNxNJ4pFDcNjo+ERzrwnhKHK5Rc0gElrgPNJrmxGi1GIGhb5KcrIxYWOZSx03ox4uq1OuZRAInTEYE0ZFlCDLmt9XNInfvWwK669j/NJGTHFsw2RZ1SRls1PzRV0pTK593KGl3QRZQ/C8j7HSowcnJPVwIX7JMfS3Uh3dnsXzBMZR4iLkesoDFamsjk2iaFA8gHeQgYnSV4o6jY8CQ+Owc/vMKHtx9AplIUJR8H2rG4M9T2XJYc4Zm3GJMsaONFZYDtZzOXHH9/cvMS+zRNBBsLfQEfJWESpF+UThGvzP15CfxC1x2BrUlT6K1wGkIuNjptTFGTwZ6Co/Yik6/h2hagSfszLtNx54E2qDnFea+WXHA7rp8xruqftDQ=

@@ -20,7 +20,11 @@
     "bower",
     "version"
   ],
-  "author": "Radu Brehar",
+  "author": "Radu Brehar <radu@jslog.com>",
+  "contributors": [
+    "Matthew Dahl (https://github.com/sandersky)",
+    "Adam Meadows (https://github.com/job13er)"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ciena-blueplanet/versiony/issues"
