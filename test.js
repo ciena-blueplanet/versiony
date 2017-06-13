@@ -1,9 +1,9 @@
 var versiony = require('./index')
 
 versiony
-    .from('package.json')
-    .major()
-    .to('package.json')
+  .from('package.json')
+  .major()
+  .to('package.json')
 
 var r = versiony.get()
 
