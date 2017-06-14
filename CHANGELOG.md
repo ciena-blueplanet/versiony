@@ -1,3 +1,8 @@
+# 1.4.2 (2017-06-14)
+* **Added** more tests
+* **Enabled** `eslint` to run on the source files and fixed lint issues
+
+
 # 1.4.1 (2017-06-09)
 * **Added** `pullapprove` integration
 * **Added** latest `pr-bumper` integration (to support `none` version bump)

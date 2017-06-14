@@ -1,6 +1,6 @@
 {
   "name": "versiony",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "A module to increment version number for your code/module. Support for npm/bower/custom files.",
   "main": "index.js",
   "scripts": {
@@ -49,6 +49,6 @@
     "sinon-chai": "^2.10.0"
   },
   "pr-bumper": {
-    "coverage": 82.72
+    "coverage": 83.89
   }
 }
