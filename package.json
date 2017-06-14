@@ -1,10 +1,10 @@
 {
   "name": "versiony",
-  "version": "2.0.0",
+  "version": "1.4.1",
   "description": "A module to increment version number for your code/module. Support for npm/bower/custom files.",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint tests/**/*.js",
+    "lint": "eslint *.js tests/**/*.js",
     "test": "npm run lint && npm run utest",
     "utest": "istanbul cover _mocha -R tests --report lcov --report json-summary"
   },

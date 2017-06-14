@@ -6,12 +6,17 @@ var hasMajorMinorPatch = require('./hasMajorMinorPatch')
 var hasVersion = require('./hasVersion')
 var getVersion = require('./getVersion')
 
+function deprecate (feature, version) {
+  console.warn(`versiony: DEPRECATED: ${feature} is deprecated and will be removed in ${version}`)
+}
+
 var versiony = (function () {
   var source, sourceJson
   var version2json = function (model, json) {
     var value = model.get()
 
     if (hasMajorMinorPatch(json)) {
+      deprecate('the major/minor/patch json interface', '2.0.0')
       json.major = value[0]
       json.minor = value[1]
       json.patch = value[2]

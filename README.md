@@ -174,6 +174,10 @@ Same for `minor()` and `patch()`
 
 Equivalent to calling `major().minor(0).patch(0)`
 
+## `newMinor()`
+
+Equivalent to calling `minor().patch(0)`
+
 ## `from(file)`
 
 Sets the current version. This clears any values set using `major(value)`, `minor(value)` and `patch(value)`.
