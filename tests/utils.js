@@ -52,44 +52,33 @@ function deleteFile (filename) {
 }
 
 /**
- * Get the version from the given file
- * @param {String} filename - the name of the file to get the version for
- * @returns {Promise} a promise resolved with the version string
+ * Tell versiony to write out the file and then read the version from that file
+ * @param {Object} ctx - the test context
+ * @param {String} ctx.filename - the filename being modified
+ * @param {String} ctx.v - the versiony instance being tested
+ * @returns {Promise} a promise resolved when the version has been read (and stored in ctx)
  */
-function getVersion (filename) {
-  const getVersionCmd = createGetVersionCmd(filename)
+function getVersion (ctx) {
+  sinon.stub(console, 'log')
+  ctx.v.to(ctx.filename).end()
+  console.log.restore()
+
+  const getVersionCmd = createGetVersionCmd(ctx.filename)
   return exec(getVersionCmd)
     .then((stdout) => {
-      return stdout.replace('\n', '')
+      ctx.version = stdout.replace('\n', '')
     })
 }
 
 /**
  * Helper to make it easier to expect specific bumps after certain things happen
  * @param {Object} ctx - the test context
- * @param {String} ctx.filename - the filename being modified
- * @param {String} ctx.v - the versiony instance being tested
- * @param {String} description - the description of the scenario
+ * @param {String} ctx.version - the actual version
  * @param {String} expectedVersion - the new version expected
- * @param {Function} callback - the callback where the actual code under test goes
  */
-function itShouldBecomeWhen (ctx, description, expectedVersion, callback) {
-  describe(`when ${description}`, function () {
-    let version
-    beforeEach(function () {
-      callback()
-      sinon.stub(console, 'log')
-      ctx.v.to(ctx.filename).end()
-      console.log.restore()
-      return getVersion(ctx.filename)
-        .then((newVersion) => {
-          version = newVersion
-        })
-    })
-
-    it(`should update the version to "${expectedVersion}"`, function () {
-      expect(version).to.equal(expectedVersion)
-    })
+function itShouldBecome (ctx, expectedVersion) {
+  it(`should update the version to "${expectedVersion}"`, function () {
+    expect(ctx.version).to.equal(expectedVersion)
   })
 }
 
@@ -97,5 +86,5 @@ module.exports = {
   createFileWithVersion,
   deleteFile,
   getVersion,
-  itShouldBecomeWhen
+  itShouldBecome
 }
