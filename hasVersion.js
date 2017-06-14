@@ -1,3 +1,3 @@
-module.exports = function(json){
-    return 'version' in json
+module.exports = function (json) {
+  return 'version' in json
 }
