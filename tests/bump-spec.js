@@ -3,6 +3,7 @@
  * applying patch, minor, or major bumps
  */
 
+'use strict'
 const versiony = require('../index')
 
 // TODO: replace this with destructuring when we support only node>=6 (@job13er 2017-06-14)
