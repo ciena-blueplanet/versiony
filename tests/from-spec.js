@@ -19,7 +19,6 @@ describe('.from()', function () {
     sandbox = sinon.sandbox.create()
     sandbox.stub(utils, 'readJsonFile')
     sandbox.stub(utils, 'writeJsonFile')
-    sandbox.stub(versiony.model, 'set')
   })
 
   afterEach(function () {
@@ -41,22 +40,8 @@ describe('.from()', function () {
         expect(utils.readJsonFile).to.have.been.calledWith('package.json')
       })
 
-      it('should set the version on the model', function () {
-        expect(versiony.model.set).to.have.been.calledWith({
-          major: 1,
-          minor: 2,
-          patch: 3,
-          preRelease: 'alpha.1'
-        })
-      })
-
       it('should store the initial version', function () {
-        expect(versiony.initial).to.eql({
-          major: 1,
-          minor: 2,
-          patch: 3,
-          preRelease: 'alpha.1'
-        })
+        expect(versiony.initial).to.eql('1.2.3-alpha.1')
       })
     })
 
@@ -69,22 +54,8 @@ describe('.from()', function () {
         expect(utils.readJsonFile).to.have.been.calledWith('_package.json')
       })
 
-      it('should set the version on the model', function () {
-        expect(versiony.model.set).to.have.been.calledWith({
-          major: 1,
-          minor: 2,
-          patch: 3,
-          preRelease: 'alpha.1'
-        })
-      })
-
       it('should store the initial version', function () {
-        expect(versiony.initial).to.eql({
-          major: 1,
-          minor: 2,
-          patch: 3,
-          preRelease: 'alpha.1'
-        })
+        expect(versiony.initial).to.eql('1.2.3-alpha.1')
       })
     })
   })
@@ -94,6 +65,7 @@ describe('.from()', function () {
     beforeEach(function () {
       utils.readJsonFile.returns({})
       sandbox.stub(logger, 'warn')
+      sandbox.stub(versiony.model, 'set')
       ret = versiony.from()
     })
 
@@ -116,6 +88,7 @@ describe('.from()', function () {
     let ret
     beforeEach(function () {
       utils.readJsonFile.throws({foo: 'bar'})
+      sandbox.stub(versiony.model, 'set')
       sandbox.stub(logger, 'error')
       ret = versiony.from()
     })
