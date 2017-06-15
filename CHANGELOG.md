@@ -1,3 +1,8 @@
+# 2.0.1 (2017-06-15)
+* **Fixed** the return value from `.end()` to include the version string instead of the version object
+* **Added** some more tests for existing and new features
+
+
 # 2.0.0 (2017-06-15)
 * **Refactored** code to use newer language features and set node engine to >= 6.0 (Resolves [#8](https://github.com/ciena-blueplanet/versiony/issues/8))
 * **Added** ability to make `.end()` quiet (no logging) by passing in `{quiet: true}` to it (Resolves [#7](https://github.com/ciena-blueplanet/versiony/issues/7))
