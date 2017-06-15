@@ -1,6 +1,7 @@
 /**
  * Specify behavior for the .newMinor() API interface
  */
+const expect = require('chai').expect
 
 const versiony = require('../lib/index')
 const {createFileWithVersion, deleteFile, getVersion, itShouldBecome} = require('./utils')
@@ -22,12 +23,17 @@ describe('.newMinor()', function () {
     })
 
     describe('when calling .newMinor()', function () {
+      let ret
       beforeEach(function () {
-        v.newMinor()
+        ret = v.newMinor()
         return getVersion(ctx)
       })
 
       itShouldBecome(ctx, '1.3.0')
+
+      it('should return itself', function () {
+        expect(ret).to.equal(v)
+      })
     })
   })
 

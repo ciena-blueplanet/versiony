@@ -2,10 +2,16 @@
  * Specify behavior for the .major() API interface
  */
 
+const expect = require('chai').expect
+
 const versiony = require('../lib/index')
 const {createFileWithVersion, deleteFile, getVersion, itShouldBecome} = require('./utils')
 
 describe('.major()', function () {
+  afterEach(function () {
+    versiony.model.reset()
+  })
+
   describe('starting from 1.2.3', function () {
     const ctx = {}
     let filename, v
@@ -22,12 +28,17 @@ describe('.major()', function () {
     })
 
     describe('when calling .major()', function () {
+      let ret
       beforeEach(function () {
-        v.major()
+        ret = v.major()
         return getVersion(ctx)
       })
 
       itShouldBecome(ctx, '2.2.3')
+
+      it('should return itself', function () {
+        expect(ret).to.equal(v)
+      })
     })
 
     describe('when calling .major(6)', function () {

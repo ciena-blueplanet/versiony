@@ -1,11 +1,16 @@
 /**
  * Specify behavior for the .minor() API interface
  */
+const expect = require('chai').expect
 
 const versiony = require('../lib/index')
 const {createFileWithVersion, deleteFile, getVersion, itShouldBecome} = require('./utils')
 
 describe('.minor()', function () {
+  afterEach(function () {
+    versiony.model.reset()
+  })
+
   describe('starting from 1.2.3', function () {
     const ctx = {}
     let filename, v
@@ -22,12 +27,17 @@ describe('.minor()', function () {
     })
 
     describe('when calling .minor()', function () {
+      let ret
       beforeEach(function () {
-        v.minor()
+        ret = v.minor()
         return getVersion(ctx)
       })
 
       itShouldBecome(ctx, '1.3.3')
+
+      it('should return itself', function () {
+        expect(ret).to.equal(v)
+      })
     })
 
     describe('when calling .minor(5)', function () {

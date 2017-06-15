@@ -1,11 +1,16 @@
 /**
  * Specify behavior for the .patch() API interface
  */
+const expect = require('chai').expect
 
 const versiony = require('../lib/index')
 const {createFileWithVersion, deleteFile, getVersion, itShouldBecome} = require('./utils')
 
 describe('.patch()', function () {
+  afterEach(function () {
+    versiony.model.reset()
+  })
+
   describe('starting from 1.2.3', function () {
     const ctx = {}
     let filename, v
@@ -22,12 +27,17 @@ describe('.patch()', function () {
     })
 
     describe('when calling .patch()', function () {
+      let ret
       beforeEach(function () {
-        v.patch()
+        ret = v.patch()
         return getVersion(ctx)
       })
 
       itShouldBecome(ctx, '1.2.4')
+
+      it('should return itself', function () {
+        expect(ret).to.equal(v)
+      })
     })
 
     describe('when calling .patch(7)', function () {

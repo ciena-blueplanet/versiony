@@ -1,11 +1,16 @@
 /**
  * Specify behavior for the .version() API interface
  */
+const expect = require('chai').expect
 
 const versiony = require('../lib/index')
 const {createFileWithVersion, deleteFile, getVersion, itShouldBecome} = require('./utils')
 
 describe('.version()', function () {
+  afterEach(function () {
+    versiony.model.reset()
+  })
+
   describe('starting from 1.2.3', function () {
     const ctx = {}
     let filename, v
@@ -22,12 +27,17 @@ describe('.version()', function () {
     })
 
     describe('when calling .version(\'4.5.6\')', function () {
+      let ret
       beforeEach(function () {
-        v.version('4.5.6')
+        ret = v.version('4.5.6')
         return getVersion(ctx)
       })
 
       itShouldBecome(ctx, '4.5.6')
+
+      it('should return itself', function () {
+        expect(ret).to.equal(versiony)
+      })
     })
 
     describe('when calling .version(\'10.11.12-beta.13\')', function () {

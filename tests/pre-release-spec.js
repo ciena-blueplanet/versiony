@@ -1,6 +1,7 @@
 /**
  * Specify behavior for the .preRelease() API interface
  */
+const expect = require('chai').expect
 
 const versiony = require('../lib/index')
 const {createFileWithVersion, deleteFile, getVersion, itShouldBecome} = require('./utils')
@@ -22,12 +23,17 @@ describe('.preRelease()', function () {
     })
 
     describe('when calling .preRelease()', function () {
+      let ret
       beforeEach(function () {
-        v.preRelease()
+        ret = v.preRelease()
         return getVersion(ctx)
       })
 
       itShouldBecome(ctx, '1.2.3-beta.1')
+
+      it('should return itself', function () {
+        expect(ret).to.equal(v)
+      })
     })
 
     describe('when calling .preRelease(\'alpha.13\')', function () {
