@@ -167,16 +167,27 @@ Causes the current patch version to be incremented by 1
 
 Sets the current patch version to have the specified value
 
+## `preRelease()`
+
+Causes the last section of the dot-delimited pre-release tag to be incremented by 1
+(e.g. `1.2.3-beta.3` becomes `1.2.3-beta.4`)
+
+## `preRelease(value)`
+
+Sets the current pre-release version to have the specified value. If the value is falsy (but not `undefined`),
+then any existing pre-release tag will be removed (e.g. `1.2.3-beta.3` becomes `1.2.3`)
+
+> **NOTE**
 Calling `major()` twice does not cause the increment to be applied twice. It is only applied once.
-Same for `minor()` and `patch()`
+Same for `minor()`, `patch()`, and `preRelease()`
 
 ## `newMajor()`
 
-Equivalent to calling `major().minor(0).patch(0)`
+Equivalent to calling `major().minor(0).patch(0).preRelease('')`
 
 ## `newMinor()`
 
-Equivalent to calling `minor().patch(0)`
+Equivalent to calling `minor().patch(0).preRelease('')`
 
 ## `from(file)`
 
