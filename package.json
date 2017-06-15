@@ -2,9 +2,9 @@
   "name": "versiony",
   "version": "1.4.2",
   "description": "A module to increment version number for your code/module. Support for npm/bower/custom files.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "lint": "eslint *.js tests/**/*.js",
+    "lint": "eslint lib/**/*.js tests/**/*.js",
     "test": "npm run lint && npm run utest",
     "utest": "istanbul cover _mocha -R tests --report lcov --report json-summary"
   },
@@ -30,6 +30,9 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ciena-blueplanet/versiony/issues"
+  },
+  "engines": {
+    "node": ">= 6.0"
   },
   "dependencies": {},
   "devDependencies": {

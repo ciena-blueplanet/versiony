@@ -9,7 +9,6 @@ const cpExec = require('child_process').exec
 const path = require('path')
 const Promise = require('promise')
 const exec = Promise.denodeify(cpExec)
-const sinon = require('sinon')
 
 /**
  * Create a full path to the given fixture filename
@@ -59,9 +58,7 @@ function deleteFile (filename) {
  * @returns {Promise} a promise resolved when the version has been read (and stored in ctx)
  */
 function getVersion (ctx) {
-  sinon.stub(console, 'log')
-  ctx.v.to(ctx.filename).end()
-  console.log.restore()
+  ctx.v.to(ctx.filename).end({quiet: true})
 
   const getVersionCmd = createGetVersionCmd(ctx.filename)
   return exec(getVersionCmd)
